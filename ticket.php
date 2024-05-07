@@ -108,38 +108,43 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100">
+<body>
     <?php require "navbar.php"; ?>
-    <div class="container mx-auto p-6">
-        <h1 class="text-3xl font-bold mb-4">Make Ticket</h1>
-        <form method="post" class="space-y-4">
 
-            <label for="order_category" class="block">Order Category:</label>
-            <select name="order_category" id="order_category" required onchange="toggleTimeInputs()" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <option value="meeting">Meeting</option>
-                <option value="pairing" selected>Repair</option>
-            </select>
+    <section class="p-12">
+        <div class="bg-transparent border-2 backdrop-blur-lg rounded-lg p-12 flex flex-col items-center justify-center  shadow-lg">
+            <div class="container mx-auto p-6">
+                <h1 class="text-3xl font-bold mb-4">Make Ticket</h1>
+                <form method="post" class="space-y-4">
 
-            <div id="timeInputs" class="hidden">
-                <label for="start_time" id="start_label" class="block">Start Time:</label>
-                <input type="datetime-local" name="start_time" id="start_time" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <label for="order_category" class="block">Order Category:</label>
+                    <select name="order_category" id="order_category" required onchange="toggleTimeInputs()" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="meeting">Meeting</option>
+                        <option value="pairing" selected>Repair</option>
+                    </select>
 
-                <label for="end_time" id="end_label" class="block">End Time:</label>
-                <input type="datetime-local" name="end_time" id="end_time" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <div id="timeInputs" class="hidden">
+                        <label for="start_time" id="start_label" class="block">Start Time:</label>
+                        <input type="datetime-local" name="start_time" id="start_time" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+
+                        <label for="end_time" id="end_label" class="block">End Time:</label>
+                        <input type="datetime-local" name="end_time" id="end_time" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+
+                    <label for="description" class="block">Description:</label>
+                    <textarea id="description" name="description" class="block w-full resize-none rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+
+                    <button type="submit" name="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 transition duration-300">Submit</button>
+                </form>
+                <?php if (!empty($error_message)) : ?>
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mt-4 rounded relative" role="alert">
+                        <strong class="font-bold">Error:</strong>
+                        <span class="block sm:inline"><?php echo $error_message; ?></span>
+                    </div>
+                <?php endif; ?>
             </div>
-
-            <label for="description" class="block">Description:</label>
-            <textarea id="description" name="description" class="block w-full resize-none rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
-
-            <button type="submit" name="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 transition duration-300">Submit</button>
-        </form>
-        <?php if (!empty($error_message)) : ?>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mt-4 rounded relative" role="alert">
-                <strong class="font-bold">Error:</strong>
-                <span class="block sm:inline"><?php echo $error_message; ?></span>
-            </div>
-        <?php endif; ?>
-    </div>
+        </div>
+    </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
