@@ -66,17 +66,42 @@ $result2 = mysqli_query($conn, $sql2);
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
+<style>
+    .input {
+        color: #8707ff;
+        border: 2px solid #8707ff;
+        padding: 10px 25px;
+        background-color: transparent;
+        border-radius: 15px;
+        max-width: 190px;
+    }
+
+    .input:active {
+        box-shadow: 2px 2px 15px #8707ff inset;
+    }
+</style>
 
 <body class="bg-gray-100">
     <?php require "navbar.php"; ?>
     <div class="container mx-auto py-8 p-4">
-        <div class="bg-white p-4 rounded-md">
+        <div class="bg-white p-4 bg-rounded-md">
             <h1 class="text-2xl font-bold mb-4">Any Problem?</h1>
-            <form method="post" enctype="multipart/form-data" class="mb-4">
-                <div class="flex justify-between mb-2">
-                    <input type="file" name="image" />
-                    <input type="text" name="desc" class="border-gray-300 border rounded-md p-2 w-3/4 focus:outline-none focus:border-blue-500" placeholder="Enter Description">
-                    <button type="submit" name="submit" class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 transition duration-300">Submit</button>
+            <form method="post" enctype="multipart/form-data" class="">
+                <div class="flex  flex-col gap-[1rem] justify-between mb-2">
+                    <div class="flex">
+                        <input type="file" name="image" class="block w-half text-sm text-slate-500
+        file:mr-4 file:py-2 file:px-4 file:rounded-md
+        file:border-0 file:text-sm file:font-semibold
+        file:bg-blue-500 file:text-white
+        hover:file:bg-pink-100" />
+                        <input type="text" name="desc"
+                            class="border-gray-300 border rounded-md p-2 w-full focus:outline-none focus:border-blue-500"
+                            placeholder="Enter Description" />
+                    </div>
+
+                    <button type="submit" name="submit"
+                        class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 transition duration-300 w-[30rem] self-center">Submit</button>
+
                 </div>
             </form>
         </div>
@@ -84,7 +109,7 @@ $result2 = mysqli_query($conn, $sql2);
     <div class="container mx-auto py-8 p-4">
         <h1 class="text-2xl font-bold mb-4">Problem</h1>
         <div class="space-y-4">
-            <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+            <?php while ($row = mysqli_fetch_assoc($result)): ?>
                 <div class="bg-white rounded-md p-4 shadow-md hover:shadow-lg transition duration-300 flex items-center">
                     <?php
                     // Fetch customer info for this specific issue
@@ -95,14 +120,16 @@ $result2 = mysqli_query($conn, $sql2);
                     ?>
                     <div>
                         <div class="rounded-full overflow-hidden h-12 w-12 flex-shrink-0 mr-4">
-                            <img src="images/<?php echo $row2['image']; ?>" alt="Profile Image" class="h-full w-full object-cover" />
+                            <img src="images/<?php echo $row2['image']; ?>" alt="Profile Image"
+                                class="h-full w-full object-cover" />
                         </div>
                         <span class="p-2"><?php echo $row2['username']; ?></span><br>
                     </div>
                     <div>
                         <img src="images/<?php echo $row['image']; ?>" alt="Issue Image" width="100px" class="mb-2">
                         <span><?php echo $row['description']; ?></span><br>
-                        <a href="issue.php?id=<?php echo $row['topicissue_id']; ?>" class="text-blue-500 italic">show all comment</a>
+                        <a href="issue.php?id=<?php echo $row['topicissue_id']; ?>" class="text-blue-500 italic">show all
+                            comment</a>
                     </div>
                 </div>
             <?php endwhile; ?>

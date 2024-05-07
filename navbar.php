@@ -99,13 +99,13 @@
                         <a href="index.php" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:text-white hover:text-blue-700 dark:hover:bg-gray-100  md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="about.php" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:text-white hover:text-blue-700 dark:hover:bg-gray-100  md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                    </li>
-                    <li>
                         <a href="ticket.php" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:text-white hover:text-blue-700 dark:hover:bg-gray-100  md:dark:hover:bg-transparent dark:border-gray-700">Ticket</a>
                     </li>
                     <li>
                         <a href="forum.php" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:text-white hover:text-blue-700 dark:hover:bg-gray-100  md:dark:hover:bg-transparent dark:border-gray-700">Forum</a>
+                    </li>
+                    <li>
+                        <a href="about.php" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent  md:p-0 dark:text-white hover:text-blue-700 dark:hover:bg-gray-100  md:dark:hover:bg-transparent dark:border-gray-700">About</a>
                     </li>
                 </ul>
             </div>

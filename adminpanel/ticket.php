@@ -29,30 +29,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Order ID is not set or empty.";
     }
-}
 
-if (isset($_POST['repair'])) {
-    if (isset($_POST["order_id"]) && !empty($_POST["order_id"])) {
-        $order_id = $_POST["order_id"];
-        $status = $_POST['status'];
-        $price = $_POST['price'];
-        $currentTime = date("Y-m-d H:i:s");
+    if (isset($_POST['repair'])) {
+        if (isset($_POST["order_id"]) && !empty($_POST["order_id"])) {
+            $order_id = $_POST["order_id"];
+            $status = $_POST['status'];
+            $price = $_POST['price'];
+            $currentTime = date("Y-m-d H:i:s");
 
-        // Update payment_status in payment table
-        $updatePaymentStatusQuery = "UPDATE payment SET payment_status = ? WHERE order_id = ?";
-        $stmt = $conn->prepare($updatePaymentStatusQuery);
-        $stmt->bind_param("si", $status, $order_id);
-        $stmt->execute();
-        $stmt->close();
+            // Update payment_status in payment table
+            $updatePaymentStatusQuery = "UPDATE payment SET payment_status = ? WHERE order_id = ?";
+            $stmt = $conn->prepare($updatePaymentStatusQuery);
+            $stmt->bind_param("si", $status, $order_id);
+            $stmt->execute();
+            $stmt->close();
 
-        // Update price and end_time in orderdetails table
-        $updateOrderDetailsQuery = "UPDATE orderdetails SET price = ?, end_time = ? WHERE order_id = ?";
-        $stmt = $conn->prepare($updateOrderDetailsQuery);
-        $stmt->bind_param("dsi", $price, $currentTime, $order_id);
-        $stmt->execute();
-        $stmt->close();
-    } else {
-        echo "Order ID is not set or empty.";
+            // Update price and end_time in orderdetails table
+            $updateOrderDetailsQuery = "UPDATE orderdetails SET price = ?, end_time = ? WHERE order_id = ?";
+            $stmt = $conn->prepare($updateOrderDetailsQuery);
+            $stmt->bind_param("dsi", $price, $currentTime, $order_id);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            echo "Order ID is not set or empty.";
+        }
     }
 }
 
@@ -102,8 +102,8 @@ $result2 = mysqli_query($conn, $sql2);
             </thead>
             <tbody class="text-gray-600">
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-                    <form action="" method="POST" class="flex items-center">
-                        <tr class="border-b border-gray-200">
+                    <tr class="border-b border-gray-200">
+                        <form action="" method="POST" class="flex items-center">
                             <td class="py-2 px-4 text-center"><?php echo $row["username"]; ?></td>
                             <td class="py-2 px-4 text-center"><?php echo $row["start_time"]; ?></td>
                             <td class="py-2 px-4 text-center"><?php echo $row["order_category"]; ?></td>
@@ -117,9 +117,9 @@ $result2 = mysqli_query($conn, $sql2);
                             <td class="text-center">
                                 <button type="submit" class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">Update</button>
                             </td>
-                        </tr>
-                    <?php endwhile; ?>
-                    </form>
+                        </form>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
@@ -142,22 +142,24 @@ $result2 = mysqli_query($conn, $sql2);
                 <tbody class="text-gray-600">
                     <?php while ($row = mysqli_fetch_assoc($result2)) : ?>
                         <tr class="border-b border-gray-200">
-                            <td class="py-2 text-center px-4"><?php echo $row["username"]; ?></td>
-                            <td class="py-2 text-center px-4"><?php echo $row["start_time"]; ?></td>
-                            <td class="py-2 text-center px-4"><?php echo $row["order_category"]; ?></td>
-                            <td class="py-2 px-4 flex justify-center items-center">
-                                <input type="hidden" name="order_id" value="<?php echo $row["order_id"]; ?>">
-                                <select class="py-1 px-2 bg-white rounded border mr-2 flex self-center" name="status">
-                                    <option value="pending" <?php echo ($row["payment_status"] === "pending") ? "selected" : ""; ?>>Pending</option>
-                                    <option value="completed" <?php echo ($row["payment_status"] === "completed") ? "selected" : ""; ?>>Completed</option>
-                                </select>
-                            </td>
-                            <td class="py-2 px-4 text-center">
-                                <input type="text" name="price" placeholder="Enter price" class="py-1 px-2 bg-white rounded border">
-                            </td>
-                            <td class="text-center">
-                                <button type="submit" name="repair" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">Repair</button>
-                            </td>
+                            <form action="" method="post">
+                                <td class="py-2 text-center px-4"><?php echo $row["username"]; ?></td>
+                                <td class="py-2 text-center px-4"><?php echo $row["start_time"]; ?></td>
+                                <td class="py-2 text-center px-4"><?php echo $row["order_category"]; ?></td>
+                                <td class="py-2 px-4 flex justify-center items-center">
+                                    <input type="hidden" name="order_id" value="<?php echo $row["order_id"]; ?>">
+                                    <select class="py-1 px-2 bg-white rounded border mr-2 flex self-center" name="status">
+                                        <option value="pending" <?php echo ($row["payment_status"] === "pending") ? "selected" : ""; ?>>Pending</option>
+                                        <option value="completed" <?php echo ($row["payment_status"] === "completed") ? "selected" : ""; ?>>Completed</option>
+                                    </select>
+                                </td>
+                                <td class="py-2 px-4 text-center">
+                                    <input type="text" name="price" placeholder="Enter price" class="py-1 px-2 bg-white rounded border">
+                                </td>
+                                <td class="text-center">
+                                    <button type="submit" name="repair" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">Repair</button>
+                                </td>
+                            </form>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>

@@ -98,12 +98,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Profile change -->
         <div class="w-full lg:w-3/12 p-4">
             <div class="profile-container bg-white rounded-lg p-4 shadow-md mt-8 mx-auto">
-                <form class="max-w-lg mx-auto" method="post" enctype="multipart/form-data">
+                <form class="max-w-lg mx-auto flex flex-col" method="post" enctype="multipart/form-data">
                     <div class="mb-4">
-                        <div class="form-group">
+                        <div class="form-group flex flex-col justify-center">
                             <img src="images/<?php echo $data_customer['image'] ?>" alt="Profile Image" class="w-40 h-40 rounded-full mx-auto block"><br>
-                            <div class="mb-2 pl-40">
-                                <label for="image-upload" class="bg-gray-900 border-gray-200 dark:bg-gray-900 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                            <div class="self-center">
+                                <label for="image-upload" class="bg-gray-900 border-gray-200 self-center dark:bg-gray-900 text-white font-bold py-2 px-4 rounded cursor-pointer">
                                     Change Image
                                     <input type="file" name="image" id="image-upload" class="hidden">
                                 </label>
@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                         </div>
                     </div>
-                    <div class="pl-48">
+                    <div class="self-center">
                         <button name="editProfile" class="bg-gray-900 border-gray-200 dark:bg-gray-900 text-white font-bold py-2 px-4 rounded">Update</button>
                     </div>
                 </form>
@@ -122,12 +122,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <!-- Order Status -->
-        <div class="w-full lg:w-7/12 p-4">
-            <div class="w-full lg:w-2/3 p-4">
+        <div class="w-full lg:w-7/12">
+            <div class="w-full  lg:w-2/3 p-4">
                 <div class="history-section mt-8 mx-auto rounded-lg bg-white border p-4 shadow-md">
                     <h1 class="text-2xl font-bold mb-4 text-gray-800">Order Status</h1>
                     <div class="overflow-x-auto">
-                        <table class="w-full">
+                        <table class="w-full  px-[4rem]">
                             <thead>
                                 <tr>
                                     <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
